@@ -1,0 +1,171 @@
+
+% -----------------------------------------------------------------------------------------------------------------
+%\newpage
+%\thispagestyle{empty}
+%\rule{\linewidth}{2pt}
+\chapter{Conceptos previos}\label{capituloconceptosprevios}
+
+En este capítulo vamos a introducir las herramientas matemáticas que utilizaremos a lo largo de todo el trabajo. En primer lugar introducimos el concepto de método iterativo, a continuación se describe la diferencia entre métodos de un paso y métodos multipaso, se presenta el concepto de orden de convergencia y se menciona la forma de obtener una aproximación de éste. Así mismo, se presentan diversas herramientas para la clasificación de métodos iterativos, como son el índice de eficiencia, el índice computacional y el concepto de método óptimo para ecuaciones. Además, se describen las técnicas (tanto para ecuaciones como para sistemas) que se utilizarán en las demostraciones del orden de convergencia de los nuevos métodos desarrollados, así como el cálculo de la matriz Jacobiana. Por otro lado también se presentan las herramientas utilizadas para el estudio de la dinámica compleja: la función racional, los puntos fijos, fijos extraños, críticos, críticos libres, periódicos..., entre otras.
+
+\section{Conceptos numéricos}
+
+Tal y como se menciona en la Introducción, las técnicas iterativas nos permiten obtener la solución aproximada de aquellas ecuaciones o sistemas de ecuaciones de la forma \eqref{intro1}, cuya solución analítica no puede ser hallada. Así pues, un \textbf{método iterativo} es una expresión que nos permite calcular el valor de un iterado a partir del anterior. Estos iterados forman una sucesión  $\displaystyle \{x_k\}$ de aproximaciones a la solución de la ecuación (siendo $\displaystyle x_0$ una aproximación inicial suficientemente buena), tal que
+$\displaystyle \lim_{k \rightarrow \infty} x_k=\alpha$, siendo $\alpha$ una solución de la ecuación no lineal \eqref{intro1}. Una de las categorías en las que se pueden clasificar los métodos iterativos es la que respecta a la cantidad de pasos utilizados para cada iteración, así pues tenemos que los \textbf{métodos de un paso} como el de Newton \eqref{newtonintroduccion} o el de Chebyshev, calculan el valor de la iteración en un sólo paso, mientras que los \textbf{métodos multipaso} (también llamados métodos predictor-corrector) como el de Homeier \eqref{homeier} u otros tantos que se extienden a partir del de Newton, lo calculan a partir del uso de por lo menos dos pasos; en el primero se acerca -se predice- el valor deseado y en el segundo y posteriores se refina -se corrige- el valor obtenido en el paso predictor. Estos últimos superan las limitaciones de los métodos de un sólo paso respecto al orden de convergencia
+y la eficiencia computacional, ya que en los métodos de un paso, la forma empleada para obtener un mayor orden de convergencia se basa en el uso de las derivadas segundas y posteriores de la función, lo cual incrementa notablemente el coste computacional del método y, en consecuencia, empeora su eficiencia.
+
+Además, el método iterativo no basta con que genere iterados, sino que tal y como se menciona en el parágrafo anterior, dichos iterados deben converger a la solución de la ecuación; o lo que es lo mismo, $\displaystyle \lim_{k \rightarrow \infty} x_k=\alpha$, siendo $\alpha$ una solución de la ecuación no lineal \eqref{intro1}. La velocidad con la que esto se consigue es el llamado \textbf{orden de convergencia} del método. Así pues, tenemos que la secuencia $\{x_k\}_{k\geq 0}$ converge a $\alpha$ con orden de convergencia $p$ si existe una constante positiva $C$ tal que
+\[
+\lim_{k \rightarrow \infty} \frac{\|x_{k+1}-\alpha \|}{\|x_{k}-\alpha \|^p}=C.
+\]
+En ese caso la \textbf{ecuación del error} del método puede ser expresada de la siguiente forma:
+\[
+e_{k+1}=C {e_{k}}^p+O({e_{k}}^{p+1}), \quad \mbox{donde} \quad e_{k}=x_{k}-\alpha.
+\]
+
+Por otro lado, siguiendo con la definición del orden de convergencia computacional (COC) propuesta por Weerakoon-Fernando en \cite{weerakoon}, de \cite{CT} extraemos una aproximación del orden de convergencia conocida como \textbf{ACOC $\rho$ (aproximación computacional del orden de convergencia)}:
+\begin{equation}\label{acoc}
+p \approx \rho = \frac{\ln{(\|x^{(k+1)}-x^{(k)}\|/\|x^{(k)}-x^{(k-1)}\|)}}{\ln{(\|x^{(k)}-x^{(k-1)}\|/\|x^{(k-1)}-x^{(k-2)}\|)}}.
+\end{equation}
+Donde $\alpha$ es un cero de la función $F$ y $x^{(k-2)}$, $x^{(k-1)}$, $x^{(k)}$, $x^{(k+1)}$ son cuatro estimaciones consecutivas de $\alpha$. Dicha aproximación es muy útil en el uso de métodos iterativos ya que nos hace ver rápidamente (de forma aproximada) cual es la velocidad de nuestro método.
+
+Dado que existe una gran cantidad de métodos iterativos para resolver un mismo problema y muchos de ellos tienen el mismo orden de convergencia, algunas de las herramientas que se definen para clasificar esos métodos son el índice de eficiencia, el índice computacional o el concepto de método óptimo bajo la conjetura de Kung-Traub. Vamos a llamar \textbf{índice de eficienca}, $I$ (el cual fue definido por Ostrowski en \cite{ostrowski}), a la expresión
+\begin{equation}
+I=p^{1/d},
+\end{equation}
+donde $p$ es el orden de convergencia y $d$ es el número de evaluaciones funcionales requeridas en cada iteración de nuestro método. 
+
+La eficiencia de un método iterativo viene dada, no sólo por el índice de eficiencia, sino también por la complejidad de la fórmula iterativa. Esta complejidad la marca el \textbf{índice computacional}, definido por Traub en \cite{TR} como:
+\begin{equation}
+I_c=p^{1/op},
+\end{equation}
+donde $p$ es el orden de convergencia y $op$ el número de productos y cocientes.
+
+La conjetura de Kung-Traub \cite{KT} sugiere (para el caso de ecuaciones) el concepto de \textbf{método óptimo} como una buena forma de resaltar los distintos métodos iterativos de entre el resto. Ésta dice que sea $d$ la cantidad de evaluaciones funcionales requeridas por la expresión iterativa de un cierto método, y sea $p$ el orden de convergencia obtenido para dicho método, éste recibirá el calificativo de óptimo si $p=2^{d-1}$. La extensión al caso de sistemas de ecuaciones de esta conjetura todavía no ha sido realizada, es por ello que tan sólo hablamos de métodos óptimos para el caso de ecuaciones, dejando para el caso de sistemas otras herramientas como el índice computacional para su comparativa entre los diversos métodos.
+
+Para el caso en el que queramos aplicar nuestros métodos iterativos sobre sistemas de ecuaciones no lineales con el siguiente aspecto
+\begin{equation}\label{sistemataylor}
+	\left.
+	\begin{array}{c}
+		f_1(x_1,x_2,...,x_n)=0\\
+		f_2(x_1,x_2,...,x_n)=0\\
+		\vdots\\
+		f_n(x_1,x_2,...,x_n)=0
+	\end{array}
+	\right\}
+\end{equation}
+donde $f_i : \mathbb{R}^n \to \mathbb{R}$, $i=1,2,...,n$, son funciones reales cualesquiera, tenemos que si definimos la función vectorial $F : \mathbb{R}^n \to \mathbb{R}^n$ cuyas funciones coordenadas son $f_i, i=1,2,...,n$, podemos expresar el sistema \eqref{sistemataylor} en la forma $F(x)=0$.
+La mayor parte de métodos de resolución aproximada de sistemas no lineales son esquemas iterativos que, partiendo de una aproximación inicial $x^{(0)} \in \mathbb{R}^n$, generan mediante una función de punto fijo una sucesión de vectores $\{x^{(k)}\}_{k\geq 0}$ que, bajo ciertas condiciones, converge a una solución $\alpha$ del sistema $F(x)=0$.
+
+A continuación introducimos algunos conceptos y notaciones que nos van a permitir utilizar con comodidad los desarrollos de Taylor de funciones de varias variables.
+
+La \textbf{matriz Jacobiana} de la función $F$ es la matriz de tamaño $n \times n$, cuyas columnas son los gradientes de las funciones coordenadas de $F$, es decir, que las columnas contienen las derivadas parciales de cada función en las variables del sistema. Teniendo en cuenta que:
+\[
+F(x)=(f_1(x),...,f_n(x)), \quad x \in \mathbb{R}^n
+\]
+la forma de denotar la matriz Jacobiana será la siguiente:
+\[
+F'(x_1,...,x_n)=\left[ {\begin{array}{*{20}c}
+	\frac{\partial f_1}{\partial x_1}&\cdots&\frac{\partial f_1}{\partial x_n}\\
+	\vdots&\ddots&\vdots\\
+	\frac{\partial f_n}{\partial x_1}&\cdots&\frac{\partial f_n}{\partial x_n}
+	\end{array} } \right]
+\]
+
+Sea $F: D\subseteq \mathbb{R}^{n} \longrightarrow \mathbb{R}^{n}$ suficientemente diferenciable en $D$. La $q$-ésima derivada de $F$ en
+$u \in \mathbb{R}^{n}$, $q \geq 1$, es la función $q$-lineal
+$F^{(q)}(u): \mathbb{R}^{n} \times \cdots \times \mathbb{R}^{n}
+\longrightarrow \mathbb{R}^{n}$ tal que $F^{(q)}(u)(v_1,\ldots,v_q) \in \mathbb{R}^{n}$.
+Notemos que
+\begin{itemize}
+	\item [1.]  $F^{(q)}(u)(v_1,\ldots,v_{q-1}, \cdot) \in {\cal L}(\mathbb{R}^{n})$
+	\item [2.]  $F^{(q)}(u)(v_{\sigma(1)},\ldots,v_{\sigma (q)})=
+	F^{(q)}(u)(v_1,\ldots,v_q)$, para todas las permutaciones $\sigma$ de $\{1,2,\ldots,q\}$.
+\end{itemize}
+
+De las propiedades arriba mencionadas, podemos usar la siguiente notación:
+\begin{itemize}
+	\item [(a)]  $F^{(q)}(u)(v_1,\ldots,v_{q})=F^{(q)}(u)v_1 \ldots v_{q}$
+	\item [(b)]  $F^{(q)}(u)v^{q-1}F^{(p)}v^p=F^{(q)}(u)F^{(p)}(u)v^{q+p-1}$
+\end{itemize}
+
+Por otro lado, para un $\alpha+h \in \mathbb{R}^{n}$ localizado en las proximidades de la solución $\alpha$ de $F(x)=0$, podemos aplicar el desarrollo en series de Taylor, y asumiendo que la matriz Jacobiana $F'(\alpha)$ no es singular, tenemos
+\begin{equation} \label{taylorconceptosprevios}
+F(\alpha+h)=F'(\alpha)\left[h + \sum_{q=2}^{p-1}C_qh^q \right] + O(h^p),
+\end{equation}
+donde $C_q=(1/q!)[F'(\alpha)]^{-1}F^{(q)}(\alpha)$, $q \geq 2$. Observemos que
+$C_qh^q \in \mathbb{R}^{n}$ ya que $F^{(q)}(\alpha) \in {\cal L}(\mathbb{R}^{n} \times
+\cdots \times \mathbb{R}^{n}, \mathbb{R}^{n})$ y
+$[F'(\alpha)]^{-1} \in {\cal L}(\mathbb{R}^{n})$.
+
+Además, podemos expresar $F'$ como
+\begin{equation} \label{TaylorF'}
+F'(\alpha+h)=F'(\alpha)\left[I + \sum_{q=2}^{p-1}qC_qh^{q-1} \right] + O(h^p),
+\end{equation}
+donde $I$ es la matriz identidad. En consecuencia, $qC_qh^{q-1} \in {\cal L}(\mathbb{R}^{n})$.
+De (\ref{TaylorF'}), obtenemos
+\begin{equation} \label{inverseF'}
+[F'(\alpha+h)]^{-1}=\left[I -X_2h+X_3h^2-X_4h^4+ \cdots \right][F'(\alpha)]^{-1} + O(h^p),
+\end{equation}
+donde
+\[
+\begin{array} {l}
+X_2=2C_2, \\
+X_3=4C_2^2-3C_3, \\
+X_4=8C_2^3-6C_2C_3-6C_3C_2+4C_4, \\
+\vdots
+\end{array}
+\]
+Estos valores se obtienen a partir de la condición
+\[
+\left[F'(\alpha + h)\right]^{-1}F'(\alpha + h)=F'(\alpha + h)\left[F'(\alpha + h)\right]^{-1}=I
+\]
+
+Denotamos por $e^{(k)}=x^{(k)}-\alpha$ el error en la $k$-ésima iteración en el caso multidimensional y $e_k=x_k-\alpha$ en el caso escalar. La ecuación
+\[
+e^{(k+1)}=L {e^{(k)}}^p+O({e^{(k)}}^{p+1}),
+\]
+donde $L$ es la función $p$-lineal
+$L \in {\cal L}(\mathbb{R}^{n} \times \cdots \times \mathbb{R}^{n}, \mathbb{R}^{n})$, llamada como la \textbf{ecuación del error} y $p$ es el \textbf{orden de convergencia}.
+Observemos que ${e^{(k)}}^p$ es $(e^{(k)}, e^{(k)}, \cdots, e^{(k)})$.
+
+\section{Conceptos dinámicos}
+Para llevar a cabo el estudio del operador asociado al método iterativo sobre polinomios cuadráticos, vamos a introducir algunos conceptos de dinámica compleja (véase \cite{blanchard2}). Éstos serán usados posteriormente en el Capítulo \ref{capitulodinamica}.
+
+El operador de punto fijo de cualquier método iterativo actuando sobre un polinomio $p(z)$ da lugar a un operador racional. Dada una función racional $R:\hat{\mathbb{C}}\rightarrow \hat{\mathbb{C}}$, donde $\hat{\mathbb{C}}$ es la esfera de Riemann, la \textbf{órbita de un punto} $z_{0} \in \hat{\mathbb{C}}$ se define como:
+\[
+\{ z_{0},\,R\left( z_{0}\right) ,\,R^{2}\left( z_{0}\right)
+,...,R^{n}\left( z_{0}\right) ,...\}.
+\]
+Analizamos el plano de fase de $R$ mediante la clasificación de los
+puntos de partida desde el comportamiento asintótico de sus órbitas.
+\begin{itemize}
+	\item Un $z_{0} \in \hat{\mathbb{C}}$ es llamado un \textbf{punto fijo} de $R$ si $R\left( z_{0}\right)=z_{0}$.
+	\item Un \textbf{punto periódico} $z_{0}$ de
+	periodo $p>1$ es un punto tal que $R^{p}\left( z_{0}\right) =z_{0}$
+	y $R^{k}\left( z_{0}\right) \neq z_{0}$, para $k<p$.
+	\item Un \textbf{punto pre-periódico} es un punto $z_{0}$ que no es periódico, pero existe un $k>0$ tal que $R^{k}\left( z_{0}\right) $ sí lo es.
+	\item Un \textbf{punto crítico} $z_{0}$ es un punto donde la derivada de la función racional se anula, $R^{\prime }\left(
+	z_{0}\right) =0$.
+	\item Un punto fijo $z_{0}$ es llamado
+	\textbf{atractor} si $|R^{\prime
+	}(z_{0})|<1$,  \textbf{superatractor} si $|R^{\prime }(z_{0})|=0$, \textbf{repulsor} si $%
+	|R^{\prime }(z_{0})|>1$ y \textbf{parabólico} si $|R^{\prime
+	}(z_{0})|=1$.
+\end{itemize}
+
+Notemos que las raíces del polinomio $p(z)$ son siempre puntos fijos del operador $R$. Sin embargo, pueden aparecer otros puntos fijos distintos de las raíces, a los que llamamos \textbf{puntos fijos extraños}, cuya estabilidad deberemos estudiar con las técnicas de la dinámica compleja. Además, si el método iterativo que define la función racional es al menor de orden 2, las raíces de $p(z)$ será también puntos críticos y por tanto superatractores. Así mismo, también pueden existir otros puntos críticos, éstos reciben el nombre de \textbf{puntos críticos libres}.
+
+\textbf{La cuenca de atracción} de un $\alpha$ atractor se define como:
+\[
+\mathcal{A}\left( \alpha \right) =\{z_{0}\in \hat{\mathbb{C}} \ : \
+R^{n}\left( z_{0}\right) {\rightarrow }\alpha, \ n{\rightarrow
+}\infty \}.
+\]
+
+El conjunto de Fatou de la función racional $R$, $\mathcal{F}%
+\left( R\right) ,$ es el conjunto de puntos $z \in \hat{\mathbb{C}}$
+cuyas órbitas tienden hacia un atractor (punto fijo, órbita periódica o
+infinito). Su complemento $\hat{\mathbb{C}}$ es el \textbf{conjunto de Julia,} $\mathcal{J}\left( R\right)$. Eso significa que la cuenca de atracción de cualquier punto fijo pertenece al conjunto de Fatou, y los contornos de estas cuencas de atracción pertenecen al conjunto de Julia.
+
+Un resultado clásico de Julia y Fatou \cite{devaney} establece que en la componente inmediata (aquella que contiene el punto fijo) de toda cuenca de convergencia hay, al menos, un punto crítico. Este hecho resalta la importancia de la obtención de puntos críticos libres ya que su existencia está relacionada con la posible aparición de cuencas de convergencia diferentes de las raíces. La herramienta denominada plano de parámetros, que analizaremos en el Capítulo \ref{capitulodinamica}, nos va a permitir estudiar en cada caso el comportamiento de los puntos críticos libres. El método de Newton es el más estudiado desde el punto de vista dinámico.
+

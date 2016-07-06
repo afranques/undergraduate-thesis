@@ -1,0 +1,71 @@
+
+% -----------------------------------------------------------------------------------------------------------------
+%\newpage
+%\thispagestyle{empty}
+%\rule{\linewidth}{2pt}
+
+\chapter{Introducción}
+El problema de la resolución de ecuaciones y sistemas de ecuaciones no lineales figura entre los más importantes en la teoría y la práctica, no sólo de las matemáticas aplicadas, sino también de muchas ramas de las ciencias, la ingeniería, la física, la informática, la astronomía, las finanzas,... Un vistazo a la bibliografía y a la lista de grandes matemáticos que han trabajado en este tema muestran un alto nivel de interés contemporáneo.
+
+Un caso particular de este problema es la aproximación de las raíces de un polinomio. Desde tiempos muy remotos se encontraban con éxito las raíces de polinomios de primer y segundo grado. En 1540 los matemáticos Scipione, Tartaglia y Cardano resolvieron la ecuación cúbica. En 1545 Ferrari resolvió la ecuación de cuarto grado. Muchos matemáticos de los siglos posteriores trataron de resolver ecuaciones de quinto grado y superior. A principios del siglo XIX Abel y Galois demostraron que es imposible obtener solución por radicales de una
+ecuación de grado mayor que cuatro. En consecuencia, para calcular las raíces de polinomios de grado mayor que cuatro se usan técnicas numéricas. A partir de este momento, la construcción de métodos numéricos para resolver ecuaciones no lineales ha atraído la atención de matemáticos puros y aplicados.
+
+Los métodos numéricos consisten en hallar, mediante un proceso iterativo, y a partir de una aproximación inicial $\displaystyle x_0$, una sucesión $\displaystyle \{x_k\}$ de aproximaciones a la solución de la ecuación, con la exigencia de que exista
+$\displaystyle \lim_{k \rightarrow \infty} x_k=\alpha$, siendo $\alpha$ una solución de la ecuación no lineal, bajo ciertos criterios de convergencia. 
+
+Consideremos el problema de encontrar un cero de la función de naturaleza no lineal $\displaystyle F : D \subseteq$ $\mathbb{R}^n \to \mathbb{R}^n$, $\displaystyle n\geq 1$ es decir,
+una solución $\alpha \in D$ del sistema (ecuación en el caso de $n=1$)
+\begin{equation}\label{intro1}
+F(x) = 0
+\end{equation}
+En la actualidad, para $n=1$, tal y como se recoge detalladamente en \cite{PB}, existen numerosos métodos iterativos para resolver el sistema no lineal (\ref{intro1}). Esta solución
+puede ser obtenida como un punto fijo de alguna función $g : \mathbb{R}^n \to \mathbb{R}^n$ mediante un método iterativo de punto fijo
+$x^{(k+1)} = g(x^{(k)}), k = 0, 1,...$, donde $x^{(0)}$ es la aproximación inicial. Tal y como veremos más adelante, para el caso de ecuaciones nos va a interesar que las raíces sean simples, y para el caso de sistemas, que la Jacobiana no sea singular. El método más conocido por ser muy simple y
+efectivo es el método de Newton, dado por
+\begin{equation}\label{newtonintroduccion}
+	x^{(k+1)}=x^{(k)}-\frac{F(x^{(k)})}{F'(x^{(k)})},\quad k=0,1,2,...
+\end{equation}
+cuya generalización a sistemas de ecuaciones fue propuesta por Ostrowski \cite{ostrowski}.
+
+Respecto a la cantidad de iterados anteriores (es decir, calculados ya previamente) en los cuales se basa el cálculo de la iteración actual, se encuentran dos tipos en los que se pueden clasificar: los métodos sin memoria y los métodos con memoria. En el caso de los métodos sin memoria, el cálculo de la iteración actual se apoya únicamente en el valor del iterado anterior (este es el caso del método de Newton \eqref{newtonintroduccion}), mientras que en el caso de los métodos con memoria, dos o más iterados anteriores son usados para el cálculo del actual (este es el caso, por ejemplo, del método de la Secante).
+
+Otras cuestiones que se plantean sobre el comportamiento de un esquema iterativo son la velocidad de convergencia
+con la que la sucesión converge a una solución y el error cometido al aproximar esa solución. Existen
+distintos indicadores para medir la velocidad de convergencia de una sucesión como son el orden de convergencia
+teórico y la tasa de convergencia práctica. Al estudiar un método iterativo es muy importante considerar dos
+aspectos: la velocidad de convergencia y el coste del mismo. Los métodos de un sólo paso como, por ejemplo,
+el método de Newton, son muy eficaces, pero aumentar su velocidad de convergencia implica evaluar sucesivas
+derivadas de la función no lineal, por lo que su utilidad en problemas prácticos se ve
+limitada.
+
+Como consecuencia de la búsqueda de variantes del método clásico de Newton para resolver ecuaciones no
+lineales con una convergencia acelerada y un número reducido de operaciones o evaluaciones funcionales en
+cada paso del proceso iterativo, se han desarrollado los métodos multipaso. Estos métodos superan las limitaciones de los métodos de un sólo paso respecto al orden
+de convergencia y la eficiencia computacional. Ellos nacen en la década de 1960 pero su especial desarrollo ha
+comenzado en la primera década del siglo XXI. La clase más importante de los métodos multipaso (para el caso de ecuaciones) son los
+métodos óptimos, en el sentido de la conjetura de Kung-Traub, como veremos en posteriores capítulos.
+
+Generalmente, el aumento del orden de un método iterativo conlleva un aumento del número de evaluaciones
+funcionales por paso. El índice de eficiencia de un método iterativo es una medida del equilibrio entre las dos cantidades: el número de
+evaluaciones funcionales por iteración y el orden de convergencia. Estos y otros conceptos se introducirán en el Capítulo \ref{capituloconceptosprevios}.
+
+En los últimos
+años, como muestra la amplia bibliografía, ha aumentado el interés en la busqueda de métodos
+multipaso con el fin de conseguir una convergencia de orden óptimo y así una mejor eficiencia.
+
+En el presente, se sigue investigando en el tema y progresivamente surgen nuevos métodos iterativos que
+modifican los métodos clásicos con el fin de acelerar la convergencia o para reducir el número de operaciones
+y las evaluaciones funcionales en cada paso del proceso iterativo. Se han desarrollado una gran cantidad de
+técnicas numéricas para la aproximación de soluciones de ecuaciones no lineales o sistemas, basadas en el método de punto
+fijo, en particular aquellas que modifican el método clásico de Newton.
+
+El objetivo general de este trabajo radica en la búsqueda de nuevos y eficientes métodos iterativos para ecuaciones y sistemas de ecuaciones no lineales. El origen se da en el trabajo realizado por Jarratt (\cite{Jarratt}), en el que se desarrolla el concepto de aceleración de la convergencia mediante el uso de una función peso aplicada sobre el segundo paso, consiguiendo de esta forma orden de convergencia cuatro. Así, en primer lugar, haciendo uso de esta misma idea, desarrollamos en el Capítulo 3 (Sección \ref{seccionlichen}) una familia uniparamétrica (que incluye el citado método de Jarratt) de métodos iterativos óptimos (según la conjetura de Kung-Traub) del tipo predictor-corrector, para ecuaciones, donde la predicción se realiza inicialmente con el método de Newton, amortiguado por una constante. En ese mismo capítulo demostramos también que su orden de convergencia es cuatro para cualquier valor real del parámetro, es decir para todos los miembros de dicha familia. Posteriormente, en el Capítulo \ref{capitulosistemas} (Sección \ref{seccionlichensistemas}), mostramos la extensión a sistemas de dicha familia, y apoyándonos en el análisis dinámico que realizamos en el Capítulo \ref{capitulodinamica} y presentamos en la \textit{``9th International Conference on Engineering Computational	Technology''} (véase \cite{napoles}), seleccionamos algunos de los mejores miembros de dicha familia y los aplicamos a uno de los pocos problemas no lineales del cual se puede obtener la solución exacta: la ecuación de difusión no lineal de Burgers. En dicho Capítulo \ref{capitulosistemas} mostramos, a través de varias tablas comparativas, como algunos miembros de esta nueva familia se comportan numéricamente sobre dicho problema.
+
+La discretización de la ecuación de Burgers para convertirla en un sistema de ecuaciones no lineales es un proceso laborioso y que proporciona orden de convergencia lineal en la variable temporal. Por ello, en lugar de diseñar nuevos métodos iterativos para abordar este problema, decidimos centrarnos en mejorar dicho proceso de discretización. El uso de la técnica de Crank-Nicholson (inicialmente diseñado para ecuaciones lineales) nos permite alcanzar orden de convergencia cuadrático en ambas variables. Estos resultados fueron presentados en la \textit{``16th Edition of the	Mathematical Modelling Conference Series''} y publicados por la revista \textit{Algorithms 8(2015) 224-233} bajo el título \textit{``Numerical Solution of Turbulence Problems by Solving
+Burgers’ Equation''} (véase \cite{paperburgers}).
+
+Siguiendo la tendencia inicial en el desarrollo de nuevos métodos iterativos, y basándonos, esta vez, en las ideas de Traub \cite{TR} y Homeier \cite{Ho}, en el Capítulo \ref{capituloecuaciones} se desarrolla también otra familia uniparamétrica de métodos iterativos multipaso, esta vez con orden de convergencia 3, y por lo tanto con un índice de eficiencia no óptimo. Sin embargo, tal y como demostraremos posteriormente en los Capítulos \ref{capitulodinamica} (análisis dinámico) y \ref{capitulosistemas} (extensión a sistemas), esta familia presenta numerosas ventajas numéricas respecto a los métodos ya existentes; entre otros, una buena estabilidad numérica y un buen comportamiento sobre sistemas de ecuaciones no lineales.
+
+%Cabe destacar, que aunque para las familias de métodos iterativos desarrolladas y presentadas en este trabajo, ha sido trivial, la extensión a sistemas de los métodos iterativos inicialmente pensados para ecuaciones, no es en general directa. Esto es debido al hecho de que, para el caso de sistemas, los denominadores de la expresión iterativa deben pasar al numerador como la inversa de su valor, lo cual es sólo posible para matrices (como el caso de la Jacobiana, es decir la derivada de la función), pero no para vectores (es decir, la evaluación de la función $F$ en un punto del espacio). Así pues, sólo nos será posible extender de ecuaciones a sistemas, aquellos métodos cuyos denominadores de la expresión iterativa tan sólo contengan derivadas de la función en cuestión, pero no evaluaciones simples de esta.
+
+Finalmente, terminamos este trabajo con el planteamiento de futuras líneas de investigación así como con el listado de referencias que, en mayor o menor medida, han sido utilizadas en el desarrollo del mismo.

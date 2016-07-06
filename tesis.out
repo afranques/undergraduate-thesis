@@ -1,0 +1,38 @@
+\BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Conceptos previos}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Conceptos num\351ricos}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{Conceptos din\341micos}{chapter.2}% 4
+\BOOKMARK [0][-]{chapter.3}{Ecuaciones no lineales}{}% 5
+\BOOKMARK [1][-]{section.3.1}{Nueva familia de m\351todos \363ptimos de orden cuatro}{chapter.3}% 6
+\BOOKMARK [2][-]{subsection.3.1.1}{Orden de convergencia}{section.3.1}% 7
+\BOOKMARK [1][-]{section.3.2}{Nueva familia de m\351todos no \363ptimos de orden tres}{chapter.3}% 8
+\BOOKMARK [2][-]{subsection.3.2.1}{Orden de convergencia}{section.3.2}% 9
+\BOOKMARK [0][-]{chapter.4}{An\341lisis din\341mico de la familia de Homeier Generalizado}{}% 10
+\BOOKMARK [1][-]{section.4.1}{An\341lisis de los puntos fijos y cr\355ticos}{chapter.4}% 11
+\BOOKMARK [1][-]{section.4.2}{Estabilidad de los puntos fijos}{chapter.4}% 12
+\BOOKMARK [1][-]{section.4.3}{El plano de par\341metros}{chapter.4}% 13
+\BOOKMARK [1][-]{section.4.4}{\323rbitas de periodo dos}{chapter.4}% 14
+\BOOKMARK [1][-]{section.4.5}{Planos din\341micos}{chapter.4}% 15
+\BOOKMARK [1][-]{section.4.6}{Conclusiones}{chapter.4}% 16
+\BOOKMARK [0][-]{chapter.5}{Discretizaci\363n de segundo orden de la ecuaci\363n de Burgers}{}% 17
+\BOOKMARK [1][-]{section.5.1}{Resultados num\351ricos}{chapter.5}% 18
+\BOOKMARK [1][-]{section.5.2}{Conclusiones}{chapter.5}% 19
+\BOOKMARK [0][-]{chapter.6}{Sistemas de ecuaciones no lineales}{}% 20
+\BOOKMARK [1][-]{section.6.1}{Nueva familia de m\351todos de orden cuatro}{chapter.6}% 21
+\BOOKMARK [2][-]{subsection.6.1.1}{Orden de convergencia}{section.6.1}% 22
+\BOOKMARK [2][-]{subsection.6.1.2}{Estimaci\363n num\351rica de la soluci\363n de la ecuaci\363n de Burgers}{section.6.1}% 23
+\BOOKMARK [1][-]{section.6.2}{Nueva familia de m\351todos de orden tres}{chapter.6}% 24
+\BOOKMARK [2][-]{subsection.6.2.1}{Orden de convergencia}{section.6.2}% 25
+\BOOKMARK [2][-]{subsection.6.2.2}{Estimaci\363n num\351rica de la soluci\363n del problema de Bratu}{section.6.2}% 26
+\BOOKMARK [0][-]{chapter.7}{L\355neas de investigaci\363n futuras}{}% 27
+\BOOKMARK [0][-]{appendix.Alph1}{An\341lisis din\341mico}{}% 28
+\BOOKMARK [1][-]{section.Alph1.1}{Representaci\363n del plano de par\341metros de un m\351todo iterativo}{appendix.Alph1}% 29
+\BOOKMARK [1][-]{section.Alph1.2}{Representaci\363n del plano din\341mico de un m\351todo iterativo}{appendix.Alph1}% 30
+\BOOKMARK [0][-]{appendix.Alph2}{M\351todos iterativos}{}% 31
+\BOOKMARK [1][-]{section.Alph2.1}{M\351todo de Newton}{appendix.Alph2}% 32
+\BOOKMARK [1][-]{section.Alph2.2}{M\351todo de Traub}{appendix.Alph2}% 33
+\BOOKMARK [1][-]{section.Alph2.3}{M\351todo M5 \(usado en la Secci\363n 5\)}{appendix.Alph2}% 34
+\BOOKMARK [1][-]{section.Alph2.4}{M\351todo M4 \(usado en la Secci\363n 6.1\)}{appendix.Alph2}% 35
+\BOOKMARK [1][-]{section.Alph2.5}{M\351todo HG}{appendix.Alph2}% 36
+\BOOKMARK [0][-]{appendix.Alph3}{Dise\361o de nuevos m\351todos iterativos mediante Wolfram Mathematica}{}% 37
+\BOOKMARK [0][-]{appendix*.26}{Bibliograf\355a}{}% 38

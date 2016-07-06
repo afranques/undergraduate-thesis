@@ -1,0 +1,195 @@
+
+% -----------------------------------------------------------------------------------------------------------------
+%\newpage
+%\thispagestyle{empty}
+%\rule{\linewidth}{2pt}
+\chapter{Ecuaciones no lineales}\label{capituloecuaciones}
+
+Este capítulo está dedicado al diseño de nuevos métodos iterativos para resolver ecuaciones no lineales. Cuando trabajamos con una única variable, como es este caso, el concepto de método óptimo según la conjetura de Kung-Traub (esta conjetura, junto con otros conceptos básicos, aparecen desarrollados en el Capítulo \ref{capituloconceptosprevios}) tiene una fuerte relevancia. Para ello, no podemos quedarnos en el diseño de métodos de un sólo paso sino que debemos hacer uso de modelos predictor-corrector, es decir de métodos multipaso. En las dos secciones que componen este capítulo, se presentan dos estudios independientes que dan lugar a dos nuevas familias de métodos iterativos. En la Sección \ref{seccionlichen}, presentamos una familia de métodos iterativos óptimos de dos pasos con orden de convergencia 4 y se demuestra su orden de convergencia. Sus diversas ventajas respecto a los métodos ya existentes se presentan a continuación, aunque las pruebas numéricas se tratan en el Capítulo \ref{capitulosistemas}, ya que la familia diseñada se aplica realmente a la resolución de sistemas. En la Sección \ref{seccionHG} se presenta una nueva familia de métodos iterativos de dos pasos con orden de convergencia 3, que tiene una estabilidad muy buena, tal y como se demostrará extensivamente en el Capítulo \ref{capitulodinamica}.
+\section{Nueva familia de métodos óptimos de orden cuatro}\label{seccionlichen}
+En esta sección presentamos una familia uniparamétrica de dos pasos para resolver ecuaciones no lineales del tipo $f(x)=0$. Su expresión iterativa es
+\begin{eqnarray}\label{1}
+y_k&=&x_k-\frac{2}{3}\frac{f(x_k)}{f'(x_k)},\\
+x_{k+1}&=&x_k-\left(1-\frac{3}{4} \frac{u_k(1+\beta u_k)}{1+u_k
+	(\beta+\frac{3}{2})}\right)\frac{f(x_k)}{f'(x_k)},\nonumber
+\end{eqnarray}
+donde $u_k=\frac{f'(y_k)-f'(x_k)}{f'(x_k)}$ y $\beta$ es un parámetro arbitrario. Nótese que esta familia contiene algunos de los ya bien conocidos métodos, como es el de Jarratt \cite{Jarratt} (para $\beta=0$).
+
+\subsection{Orden de convergencia}
+En esta sección, el orden de convergencia local de la familia de métodos propuesta en \eqref{1} es analizado. Observemos que todos los elementos de la familia son de orden 4 con tres evaluaciones funcionales por iteración, por lo que se trata de una familia de métodos óptimos según la conjetura de Kung y Traub.
+
+\begin{theorem}\label{teorema1}
+	Sea $\alpha \in$ I un cero simple de una función suficientemente diferenciable f : I $\subset$ $\mathbb{R} \to \mathbb{R}$ en un intervalo abierto I, y $x_0$ una aproximación inicial suficientemente próxima a la solución $\alpha$, el método definido en (\ref{1}) tiene orden de convergencia cuatro para cualquier valor real de $\beta$, cuya ecuación del error viene dada por:
+	\begin{equation}\label{ecuacionerrorlichen}
+	e_{k + 1} = \left(\left(1 - \frac{8}{3}\beta\right)c_2^3  -
+	{c_3}{c_2} + \frac{1}{9}{c_4}\right)e_k^{4} + O({e_k^{5}}),
+	\end{equation}
+	donde ${c_k} = (1/k!)\frac{f^{(k)}(\alpha )}{f'(\alpha )}$, $k =
+	2,3,4,...$, y $e_{k} = x_k - \alpha$.
+\end{theorem}
+
+\begin{proof}\label{demostracion1}
+	Si expresamos el desarrollo en serie de Taylor de $f(x_k)$ y $f'(x_k)$ alrededor de $\alpha$, obtenemos
+	\begin{equation}\label{3}
+	f(x_k) = f'(\alpha )\left[e_k + c_2 e_k^2 + c_3 e_k^3 + c_4 e_k^4 + c_5 e_k^5\right] + O(e_k^6)
+	\end{equation}
+	y
+	\begin{equation}\label{4}
+	f'(x_k) = f'(\alpha )\left[1 + 2{c_2}{e_k} + 3{c_3}{e_k}^2 + 4{c_4}{e_k}^3 \right] + O(e_k^4).
+	\end{equation}
+	
+	A partir de \eqref{3} y \eqref{4}, calculamos la serie de Taylor del cociente del primer paso,
+	\begin{eqnarray*}
+		\frac{f(x_k)}{f'(x_k)} &=& {e_k} - {c_2}{e_k}^2 + 2(c_2^2 - {c_3}){e_k}^3 \\
+		& & + ( - 4c_2^3 + 4{c_2}{c_3} + 3{c_3}{c_2} - 3{c_4}){e_k}^4+ O({e_k}^5).
+	\end{eqnarray*}
+	Así pues, el error en el primer paso del método es,
+	\begin{eqnarray*}\label{7}
+		y_k - \alpha &=& \frac{1}{3}{e_k} + \frac{2}{3}{c_2}{e_k}^2 - \frac{4}{3}(c_2^2 - {c_3}){e_k}^3 \\
+		& & + \frac{2}{3}(4c_2^3 - 7{c_2}{c_3} + 3{c_4}){e_k}^4+ O({e_k}^5).\nonumber
+	\end{eqnarray*}
+	
+	Además, sabemos que,
+	\begin{eqnarray}\label{8}
+	f'({y_k}) &=& f'(\alpha )\left[ 1 + 2{c_2}({y_k} - \alpha ) + 3{c_3}{({y_k} - \alpha )^2} + 4{c_4}{({y_k} - \alpha )^3}\right] + O({({y_k} - \alpha )^4})\\
+	&=& f'(\alpha )\left[ 1 + \frac{2}{3}{c_2}{e_k} +\left( \frac{4}{3}c_2^2 + \frac{1}{3}{c_3}\right){e_k}^2 + \left( - \frac{8}{3}c_2^3 + 4{c_2}{c_3} + \frac{4}{{27}}{c_4}\right){e_k}^3 \right] + O({e_k}^4).\nonumber
+	\end{eqnarray}
+	
+	Y ahora, haciendo uso de \eqref{4} y de
+	\eqref{8}, obtenemos el desarrollo de Taylor de $u_k$ de la siguiente forma:
+	\begin{eqnarray*}\label{10}
+		u_k&=&\frac{f'(y_k)-f'(x_k)}{f'(x_k)}\\
+		& =&- \frac{4}{3}{c_2}{e_k} + \left(4c_2^2 - \frac{8}{3}{c_3}\right){e_k}^2 + \left(- \frac{{32}}{3}c_2^3 + \frac{40}{3}{c_2}{c_3} - \frac{{104}}{{27}}{c_4}\right){e_k}^3 + O({e_k}^4).\nonumber
+	\end{eqnarray*}
+	
+	Así pues, obtenemos que,
+	\begin{eqnarray*}
+		\frac{3}{4} \frac{u_k(1+\beta u_k)}{1+u_k (\beta+\frac{3}{2})} &=&
+		- {c_2}{e_k} + (c_2^2 - 2{c_3}){e_k}^2 + ( - \frac{8}{3}\beta c_2^3
+		+ 2{c_2}{c_3} - \frac{{26}}{9}{c_4}){e_k}^3+ O({e_k}^4)
+	\end{eqnarray*}
+	y en consecuencia,
+	\begin{eqnarray*}
+		\left(1-\frac{3}{4} \frac{u_k(1+\beta u_k)}{1+u_k
+			(\beta+\frac{3}{2})}\right)\frac{f(x_k)}{f'(x_k)}
+		&=&  {e_k} + \left(\left(-1 + \frac{8}{3}\beta\right)c_2^3  + {c_3}{c_2} - \frac{1}{9}{c_4}\right)e_k^{4} + O({e_k}^5).
+	\end{eqnarray*}
+	
+	Finalmente, la ecuación del error se expresa como:
+	\begin{equation*}\label{12}
+	e_{k + 1} = \left(\left(1 - \frac{8}{3}\beta\right)c_2^3  - {c_3}{c_2} + \frac{1}{9}{c_4}\right)e_k^{4} + O({e_k^{5}})
+	\end{equation*}
+	y el teorema queda demostrado. $\Box$
+\end{proof}
+
+Destacamos el hecho de que distintos métodos pueden ser obtenidos a partir de \eqref{1} mediante el uso de distintos valores de $\beta$, siendo algunos de ellos bien conocidos. Por ejemplo,
+\begin{itemize}
+	\item Si usamos $\beta=0$, obtenemos el método clásico de Jarratt (véase \cite{Jarratt}), cuyo segundo paso en la expresión iterativa es
+	\[
+	x_{k+1} =
+	y_k-\frac{1}{2}\frac{f'(x_k)+3f'(y_k)}{3f'(y_k)-f'(x_k)}\frac{f(x_k)}{f'(x_k)}.
+	\]
+	\item Cuando $\beta=1$, otro método es hallado, cuyo segundo paso se calcula como
+	\[
+	x_{k+1} =
+	y_k-\frac{6f'(x_k)^2-13f'(x_k)f'(y_k)+3f'(y_k)^2}{2f'(x_k)(3f'(x_k)-5f'(y_k))}\frac{f(x_k)}{f'(x_k)}.
+	\]
+	\item Si $\beta=-\frac{3}{2}$, la expresión del segundo paso es
+	\[
+	x_{k+1} =
+	y_k-\frac{23f'(x_k)^2-24f'(x_k)f'(y_k)+9f'(y_k)^2}{8f'(x_k)^2}\frac{f(x_k)}{f'(x_k)}.
+	\]
+	\item Y si, por ejemplo $\beta=\frac{1}{2}$, entonces tenemos que
+	\[
+	x_{k+1} =
+	y_k-\frac{(f'(x_k)-3f'(y_k))(5f'(x_k)-f'(y_k))}{8f'(x_k)(f'(x_k)-2f'(y_k))}\frac{f(x_k)}{f'(x_k)}.
+	\]
+\end {itemize}
+	
+Otro aspecto interesante de esta familia de métodos es que puede ser directamente extendida para su uso en sistemas de ecuaciones no lineales $F(x)=0$, ya que en los denominadores de la expresión iterativa sólo aparecen primeras derivadas de las funciones no lineales y ninguna evaluación de dichas funciones sin derivar (como también ocurre en el método de Jarratt). Así pues, para el caso de un sistema de ecuaciones no lineales, la correspondiente expresión iterativa del método es
+\begin{eqnarray}\label{s1ecuaciones}
+y^{(k)} &=& x^{(k)} - \frac{2}{3}[F'(x^{(k)})]^{-1}F(x^{(k)}),\nonumber\\
+x^{(k + 1)}& =& x^{(k)} - \left(I - \frac{3}{4}A^{-1}
+B\right)[F'(x^{(k)})]^{-1}F(x^{(k)}),
+\end{eqnarray}
+donde $u ^{(k)} = [F'(x^{(k)})]^{-1}\left(F'(y^{(k)}) -
+F'(x^{(k)})\right)$, $A= I + (\frac{3}{2} + \beta )u^{(k)}$,
+$B=u^{(k)} + \beta u^{(k)^2}$ y $\beta$ es un parámetro arbitrario. Tal y como veremos en el Capítulo \ref{seccionHGsistemas}, esta extensión a sistemas conserva el orden de convergencia.
+
+En el Capítulo \ref{capitulosistemas} efectuaremos algunas pruebas numéricas de elementos de esta familia sobre sistemas de ecuaciones, sin embargo avanzamos ya algunas de las conclusiones obtenidas: tal y como se demostró en \cite{napoles}, la familia disfruta de una buena estabilidad para gran parte de sus miembros, además tal y como se desprende de su aplicación sobre la ecuación de Burgers (Sección \ref{lichenburger}), su solución estimada es tan buena como la de otros métodos clásicos, pero con mayor orden de convergencia. Finalmente, pero no menos importante, cabe destacar su facilidad para extenderse al caso de sistemas, algo no muy común entre el resto de métodos de su misma categoría.
+
+Sin embargo, la calidad del método no sólo se mide con el hecho de que este sea óptimo o no, ya que otros factores tan importantes como este también entran en juego. Este es el caso del análisis dinámico, cuyo procedimiento será estudiado en profundidad en el próximo capítulo.
+
+\section{Nueva familia de métodos no óptimos de orden tres}\label{seccionHG}
+En los últimos años se han diseñado nuevos métodos iterativos con el objetivo de incrementar el orden de convergencia, sin embargo pocos han sido los que se han planteado aprovechar los ya existentes métodos clásicos, como el de Homeier \cite{Ho} o el de Traub \cite{TR}, para generalizarlos y mejorar su estabilidad dinámica al mismo tiempo que mantener su orden de convergencia. Así pues, aquí es donde empieza nuestro segundo estudio, en el cual proporcionamos una familia uniparamétrica de métodos iterativos que incluye, como casos particulares, tanto el método de Homeier como el de Traub.
+
+Esta familia ha sido obtenida, precisamente, mediante la observación de dichos dos métodos clásicos, cuya expresión iterativa es, en el caso de Homeier
+\begin{gather}\label{homeier}
+y_k=x_k-\frac{f(x_k)}{f'(x_k)}, \\\nonumber x_{k+1}=x_k-\frac{1}{2}\left[\frac{f(x_k)}{f'(y_k)}+\frac{f(x_k)}{f'(x_k)}\right]
+\end{gather}
+Así pues, obtenemos como generalización de ambos, es decir la sustitución de todas las constantes por parámetros genéricos, el siguiente esquema
+\begin{gather}\label{generalizacion}
+y_k=x_k-\varphi\frac{f(x_k)}{f'(x_k)}, \\\nonumber x_{k+1}=x_k-\left[\gamma\frac{f(x_k)}{f'(y_k)}+\delta\frac{f(x_k)}{f'(x_k)}\right]
+\end{gather}
+donde $\varphi$, $\gamma$ y $\delta$ son los tres parámetros que dan lugar a cada uno de los nuevos métodos de la familia en cuestión, cuyo caso particular es, entre otros, el ya mencionado método de Homeier (cuando $\gamma=\frac{1}{2}$, $\varphi=1$ y $\delta=\frac{1}{2}$).
+
+Como vamos a demostrar a continuación, esta familia (\ref{generalizacion}) tiene orden de convergencia tres cuando $\varphi=\frac{1}{2\gamma}$ y $\delta=1-\gamma$, siendo $\gamma \neq 0$.
+
+Cabe destacar que estos resultados, junto con los obtenidos en el Capítulo \ref{capitulodinamica}, han sido enviados a la revista \textit{``Nonlinear Dynamics''}, bajo el título \textit{``Chaos and Convergence of a family generalizing Homeier's method with damping parameters''}, y están, actualmente, pendientes de publicación.
+
+\subsection{Orden de convergencia}\label{ordenhg}
+Bajo condiciones estándar de diferenciabilidad y no singularidad de la función no lineal en la solución, podemos demostrar el orden de convergencia de la familia presentada.
+\begin{theorem}\label{teorema2}
+	Sea $\alpha \in$ I un cero simple de una función suficientemente diferenciable $f : I \subset$ $\mathbb{R} \to \mathbb{R}$ en un intervalo abierto I, y $x_0$ una aproximación inicial suficientemente próxima a la solución $\alpha$. El método definido en (\ref{generalizacion}) tiene orden de convergencia tres si $\varphi=\frac{1}{2\gamma}$ y $\delta=1-\gamma$, donde $\gamma \neq 0$. La ecuación del error del método es
+	\begin{equation*}
+	e_{k+1}=\left[\left(8\gamma-3-4\gamma^2\right)c_2^2+\left(\frac{11}{4}-6\gamma+3\gamma^2\gamma\right)c_3\right]e^3_k+O(e^4_k),
+	\end{equation*}
+	\mbox{donde} $c_k=\dfrac{1}{k!}\frac{f^{(k)}(\alpha)}{f'(\alpha)}$, \  $k=2,3$,  y $e_k=x_k-\alpha$.
+\end{theorem}
+
+\begin{proof}
+	La prueba de este resultado sigue los mismos pasos que la del Teorema \ref{teorema1}, apoyándose en los desarrollos de Taylor de los diferentos elementos que aparecen en la expresión iterativa. Así, desarrollando por Taylor $f(x_k)$ y $f'(x_k)$ alrededor de $\alpha$, obtenemos
+	\begin{equation*} \label{tay1ecs}
+	f(x_k)=f'(\alpha)\left[e_k+c_2e_k^2+c_3e_k^3\right]+O(e_k^4)
+	\end{equation*}
+	y
+	\begin{equation*}\label{tay2ecs}
+	f'(x_k)=f'(\alpha)\left[1+2c_2e_k+3c_3e_k^2\right]+O(e_k^3).
+	\end{equation*}
+	Sustituyendo estas expresiones en el primer paso de (\ref{generalizacion}), obtenemos que
+	\begin{align*}\label{eqy}
+	y_k-\alpha  \nonumber =  (1-\varphi)e_k+\varphi c_2e_k^2+O(e_k^3).
+	\end{align*}
+	
+	De forma análoga a como hemos hecho para $f'(x_k)$, tenemos que si expresamos $f'(y_k)$ en serie de Taylor alrededor de $\alpha$,
+	\begin{equation}\label{tayFecs}
+	f'(y_k) = f'(\alpha)\left[1+2c_2(y_k-\alpha)+3c_3(y_k-\alpha)^2\right]+O((y_k-\alpha)^3)
+	\end{equation}
+	y, si sustituimos en (\ref{tayFecs}) las potencias de $y_k-\alpha$, obtenemos después de algunas operaciones algebraicas,
+	\begin{align*} \label{tay5ecs}
+	f'(y_k)=f'(\alpha)\left[1-2c_2(\varphi-1)e_k+(2\varphi c_2^2+3c_3(\varphi -1)^2)e_k^2\right]+O(e_k^3).
+	\end{align*}
+	Finalmente, la ecuación del error se expresa como
+	\begin{align}
+	e_{k+1} = & (1-\gamma-\delta)e_k+(\gamma+\delta-2\varphi\gamma)c_2e_k^2\\\nonumber &+\left[(8\varphi\gamma-2\gamma-2\delta-4\varphi^2\gamma)c_2^2+(2\gamma+2\delta-6\varphi\gamma+3\varphi^2\gamma)c_3\right]e_k^3+O(e_k^4).
+	\end{align}
+	
+	Ahora, si forzamos que los términos correspondientes a $e_k$ y $e_k^2$ sean eliminados, tenemos el siguiente sistema:
+	\begin{equation*}
+	\left.
+	\begin{array}{r}
+	1-\gamma-\delta=0 \\
+	\gamma+\delta-2\varphi\gamma=0,
+	\end{array}
+	\right\}
+	\end{equation*}
+	cuya solución es $\varphi=\frac{1}{2\gamma},\quad \delta=1-\gamma$, para todo $\gamma \neq 0$. Esta solución es única, aunque depende de un parámetro libre, $\gamma$. Si sustituimos $\varphi$ y $\delta$ en \eqref{generalizacion}, tenemos una familia con orden de convergencia tres, cuya ecuación del error puede ser expresada como:
+	\begin{align}\label{ecuacionerrorhomeier}
+	e_{k+1} = \left[\left(8\gamma-3-4\gamma^2\right)c_2^2+\left(\frac{11}{4}-6\gamma+3\gamma^2\right)c_3\right]e_k^3+O(e_k^4)
+	\end{align}
+	y el teorema queda demostrado. $\Box$
+\end{proof}
+
+Así pues, una vez el orden de convergencia de la familia ha quedado determinado, nos falta analizar, tal y como haremos en los Capítulos \ref{capitulodinamica} y \ref{capitulosistemas} (Sección \ref{seccionHGsistemas}), qué miembros de la familia tienen mejores propiedades de estabilidad.
+
+En esta sección, una nueva familia de métodos con orden de convergencia cuatro ha sido presentada, su convergencia local ha sido demostrada y, aunque su análisis dinámico y numérico será efectuado en los Capítulos \ref{capitulodinamica} y \ref{capitulosistemas}, sus diversas ventajas son: la gran mayoría de los miembros de la familia se corresponde con métodos iterativos con un muy buen comportamiento numérico, lo cual implica que a igualdad de orden de convergencia que los métodos de Homeier y Traub, éste disfruta de una mayor diversidad paramétrica, pudiéndose escoger valores del parámetro no sólo correspondientes a sendos métodos, sino también a toda una variedad de nuevas opciones. Ejemplos de estos son los valores de $\gamma$ que simplifican la ecuación del error \eqref{ecuacionerrorhomeier} mediante la anulación de los términos $c_2^2$ ó $c_3$, los cuales aparecerán en el siguiente capítulo como mimebros estables de la familia.

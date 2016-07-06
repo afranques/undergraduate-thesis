@@ -1,0 +1,39 @@
+\select@language {spanish}
+\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Conceptos previos}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}Conceptos num\IeC {\'e}ricos}{4}{section.2.1}
+\contentsline {section}{\numberline {2.2}Conceptos din\IeC {\'a}micos}{7}{section.2.2}
+\contentsline {chapter}{\numberline {3}Ecuaciones no lineales}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Nueva familia de m\IeC {\'e}todos \IeC {\'o}ptimos de orden cuatro}{9}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Orden de convergencia}{9}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Nueva familia de m\IeC {\'e}todos no \IeC {\'o}ptimos de orden tres}{12}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Orden de convergencia}{12}{subsection.3.2.1}
+\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis din\IeC {\'a}mico de la familia de Homeier Generalizado}{14}{chapter.4}
+\contentsline {section}{\numberline {4.1}An\IeC {\'a}lisis de los puntos fijos y cr\IeC {\'\i }ticos}{15}{section.4.1}
+\contentsline {section}{\numberline {4.2}Estabilidad de los puntos fijos}{17}{section.4.2}
+\contentsline {section}{\numberline {4.3}El plano de par\IeC {\'a}metros}{18}{section.4.3}
+\contentsline {section}{\numberline {4.4}\IeC {\'O}rbitas de periodo dos}{20}{section.4.4}
+\contentsline {section}{\numberline {4.5}Planos din\IeC {\'a}micos}{20}{section.4.5}
+\contentsline {section}{\numberline {4.6}Conclusiones}{24}{section.4.6}
+\contentsline {chapter}{\numberline {5}Discretizaci\IeC {\'o}n de segundo orden de la ecuaci\IeC {\'o}n de Burgers}{25}{chapter.5}
+\contentsline {section}{\numberline {5.1}Resultados num\IeC {\'e}ricos}{27}{section.5.1}
+\contentsline {section}{\numberline {5.2}Conclusiones}{32}{section.5.2}
+\contentsline {chapter}{\numberline {6}Sistemas de ecuaciones no lineales}{33}{chapter.6}
+\contentsline {section}{\numberline {6.1}Nueva familia de m\IeC {\'e}todos de orden cuatro}{33}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Orden de convergencia}{33}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Estimaci\IeC {\'o}n num\IeC {\'e}rica de la soluci\IeC {\'o}n de la ecuaci\IeC {\'o}n de Burgers}{34}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}Nueva familia de m\IeC {\'e}todos de orden tres}{37}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Orden de convergencia}{37}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Estimaci\IeC {\'o}n num\IeC {\'e}rica de la soluci\IeC {\'o}n del problema de Bratu}{39}{subsection.6.2.2}
+\contentsline {chapter}{\numberline {7}L\IeC {\'\i }neas de investigaci\IeC {\'o}n futuras}{43}{chapter.7}
+\contentsline {chapter}{\numberline {A}An\IeC {\'a}lisis din\IeC {\'a}mico}{44}{appendix.Alph1}
+\contentsline {section}{\numberline {A.1}Representaci\IeC {\'o}n del plano de par\IeC {\'a}metros de un m\IeC {\'e}todo iterativo}{44}{section.Alph1.1}
+\contentsline {section}{\numberline {A.2}Representaci\IeC {\'o}n del plano din\IeC {\'a}mico de un m\IeC {\'e}todo iterativo}{45}{section.Alph1.2}
+\contentsline {chapter}{\numberline {B}M\IeC {\'e}todos iterativos}{47}{appendix.Alph2}
+\contentsline {section}{\numberline {B.1}M\IeC {\'e}todo de Newton}{47}{section.Alph2.1}
+\contentsline {section}{\numberline {B.2}M\IeC {\'e}todo de Traub}{47}{section.Alph2.2}
+\contentsline {section}{\numberline {B.3}M\IeC {\'e}todo M5 (usado en la Secci\IeC {\'o}n \ref {articuloburger})}{47}{section.Alph2.3}
+\contentsline {section}{\numberline {B.4}M\IeC {\'e}todo M4 (usado en la Secci\IeC {\'o}n \ref {seccionlichensistemas})}{48}{section.Alph2.4}
+\contentsline {section}{\numberline {B.5}M\IeC {\'e}todo HG}{48}{section.Alph2.5}
+\contentsline {chapter}{\numberline {C}Dise\IeC {\~n}o de nuevos m\IeC {\'e}todos iterativos mediante Wolfram Mathematica}{49}{appendix.Alph3}
+\contentsline {chapter}{Bibliograf\'{\i }a}{50}{appendix*.26}

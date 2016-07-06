@@ -1,0 +1,188 @@
+\documentclass[a4paper,11pt,openany]{book} % Definimos el estilo del documento
+\usepackage[spanish]{babel} % Corta palabras en espanol
+%\usepackage[latin1]{inputenc} % Escribir con accentos
+\usepackage{fancybox}
+\usepackage{graphicx} % Utilizamos el paquete para gestionar imagenes jpg
+\usepackage{epstopdf}
+\usepackage{ntheorem}
+\usepackage{caption}
+%\usepackage[justification=centering]{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage[]{mcode}
+\usepackage[export]{adjustbox}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{float}
+\DeclareGraphicsExtensions{.jpg,.pdf,.png,.gif,.eps}
+\usepackage{geometry}
+\geometry{verbose,tmargin=3.0cm,bmargin=3.0cm,lmargin=2.5cm,rmargin=2.0cm}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+%\usepackage{amsthm}
+\usepackage{titlesec}
+\usepackage[normalem]{ulem}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{calc}
+\usepackage{subfig}
+%\usepackage{xspace}
+\usepackage{afterpage}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{quotchap}
+\usepackage{tocbibind}
+\usepackage[utf8]{inputenc}
+\decimalpoint
+\parskip=3.0mm
+\date{}
+\renewcommand{\contentsname}{Indice}
+\renewcommand{\partname}{Parte}
+\renewcommand{\chaptername}{Capítulo}
+\renewcommand{\appendixname}{Apéndice}
+\renewcommand{\bibname}{Bibliografía}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\listfigurename}{Índice de figuras}
+\renewcommand{\tablename}{Tabla}
+\renewcommand{\listtablename}{Índice de tablas}
+\addto\captionsspanish{\def\tablename{Tabla}}
+
+
+%===============================================================
+% declaracion de los teoremas, definiciones, corolario y lema
+
+\newtheorem{thm}{Teorema}[section]
+\newtheorem{theorem}{Teorema}
+\newtheorem{definicion}{Definici\'{o}n}[section]
+\newtheorem{cor}{corolario}[section]
+\newtheorem{note}{Nota}[section]
+\newtheorem{lem}[thm]{Lema}
+\newtheorem*{proof}{Demostraci\'on}
+\newtheorem{pro}{Propiedad}[section]
+\newtheorem{propos}{Proposici\'{o}n}[section]
+\newtheorem{obs}{Observaci\'{o}n}[section]
+\newtheorem{tabla}{Tabla}[section]
+\newtheorem{lemma}{Lema}[section]
+
+%======================================================================
+%  Paquetes para encabezado y pie de p'agina
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO]{\leftmark} % En las páginas impares, parte izquierda del encabezado, aparecerá el nombre de capítulo
+\fancyhead[RE]{\rightmark} % En las páginas pares, parte derecha del encabezado, aparecerá el nombre de sección
+\fancyhead[RO,LE]{\thepage} % Números de página en las esquinas de los encabezados
+\fancyfoot[LE,RO]{Universidad Polit\'{e}cnica de Valencia} %Escribo este texto a la izquierda en las páginas impares y a la derecha en las pares
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+\renewcommand{\chaptermark}[1]{\markboth{\textbf{\thechapter. #1}}{}} % Formato para el capítulo: N. Nombre
+\renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}} % Formato para la sección: N.M. Nombre
+
+\renewcommand{\headrulewidth}{0.1pt} % Ancho de la línea horizontal bajo el encabezado
+\renewcommand{\footrulewidth}{0.1pt} % Ancho de la línea horizontal sobre el pie (que en este ejemplo está vacío)
+\setlength{\headheight}{1.5\headheight} % Aumenta la altura del encabezado en una vez y media
+
+%======================================================================
+% Define línea gruesa
+
+\makeatletter
+\def\hrulefill{\leavevmode\leaders\hrule\@height-3pt\@depth7pt\hfill\kern\z@}
+\makeatother
+
+%======================================================================
+%  Formato a los títulos de capítulos
+
+\newcommand{\bigrule}{\titlerule[0.5mm]}
+\titleformat{\chapter}[display]
+{\bfseries \huge}
+{\titlerule
+\filleft
+\Large\chaptertitlename\
+\Large\thechapter}
+{0mm}
+{\filleft}
+[\vspace{0.5mm} \bigrule]
+
+%======================================================================
+% Define Contadores para el índice a 6 niveles
+
+\setcounter{tocdepth}{6}  % Genera índice hasta 6 niveles
+\setcounter{secnumdepth}{6} % Genera numeración en el cuerpo documento
+
+%======================================================================
+% Instrucciones para el título
+%======================================================================
+% Empieza el documento
+
+\sloppy
+%\frenchspacing
+\setlength{\parindent}{0pt}
+%\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\pagenumbering{roman}
+
+\begin{document}
+
+
+%======================================================================
+% Generamos titulo e indice de contenidos
+
+\frontmatter
+\input{portada1}
+\newpage
+\begin{em}
+	\vspace*{3cm}
+	\hfill \textbf{A mi madre.}
+\end{em}
+\thispagestyle{empty}
+\mbox{}
+\input{agradecimientos}
+\clearpage
+\thispagestyle{empty}
+\mbox{}
+\input{abstract}
+%\newpage
+%\thispagestyle{empty}
+%\mbox{}
+
+%======================================================================
+% Generamos titulo e indice de contenidos
+
+%\cleardoublepage
+%\input{dedicatoria}
+%\input{agradecimientos}
+%\cleardoublepage
+
+%======================================================================
+\pagestyle{empty} %get rid of header/footer for toc page
+\chapter*{Índice general}
+\makeatletter
+\@starttoc{toc}
+\makeatother
+%\tableofcontents
+\clearpage %start new page
+\pagestyle{plain} % put headers/footers back on
+\setcounter{page}{1} %reset the page counter
+%\cleardoublepage
+%\clearpage
+\newcommand{\vs}{\vspace{0.5cm}}
+\newcommand{\hs}{\hspace{3.5pt}}
+\newcommand{\cl}{\\[0.1cm]}
+
+%==================================================================
+\mainmatter
+\pagenumbering{arabic}
+\input{introduccion}
+\input{conceptosprevios}
+%=========================================================================
+\input{ecuaciones}
+\input{dinamica}
+\input{crank}
+\input{sistemas}
+\input{futuro}
+\input{Anexos}
+
+\input{bibl}
+
+\end{document}
